@@ -1,35 +1,55 @@
-<ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>
-       Categories
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-grid>
+<!-- ------ -->
+<!-- Header -->
+<!-- ------ -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Categories</ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<!-- ------- -->
+<!-- Content -->
+<!-- ------- -->
+<ion-content>
+  <!-- Search & sort -->
+  <ion-grid class="ion-padding">
     <ion-row>
-      <ion-col size="6">
-      <ion-list>
+      <ion-col size="12" size-sm="6">
         <ion-item>
-          <ion-select>
-            <div slot="label">Name (A-Z)</div>
-            <ion-select-option value="auswärts Essen">Auswärts Essen</ion-select-option>
+          <ion-icon name="swap-vertical" slot="start"></ion-icon>
+          <ion-select interface="popover" value="Name (A-Z)">
+            <ion-select-option>Created at (newest first)</ion-select-option>
+            <ion-select-option>Created at (oldest first)</ion-select-option>
+            <ion-select-option>Name (A-Z)</ion-select-option>
+            <ion-select-option>Name (Z-A)</ion-select-option>
           </ion-select>
         </ion-item>
-      </ion-list>
       </ion-col>
-      <ion-col size="6">
-      <ion-toolbar>
-      </ion-toolbar>
-      <ion-toolbar>
-        <ion-searchbar></ion-searchbar>
-      </ion-toolbar>
+      <ion-col size="12" size-sm="6">
+        <ion-item>
+          <ion-icon name="search" slot="start"></ion-icon>
+          <ion-input maxlength="40" placeholder="Search" [clearInput]="true"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
+
+  <!-- Category list -->
+  <ion-list inset="true">
+
+    <!-- Categories -->
+    <ion-item button="true" [detail]="true" (click)="openModal()">
+      <ion-label>Auswärts Essen</ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- Create fab button -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
