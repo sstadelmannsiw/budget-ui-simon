@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ActionSheetService } from '../../shared/service/action-sheet.service';
 import { filter, from } from 'rxjs';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-category-modal',
   templateUrl: './category-modal.component.html',
 })
 export class CategoryModalComponent {
+  readonly categoryForm!: FormGroup; // Füge categoryForm hinzu
+  submitting = false; // Füge submitting hinzu
   constructor(
     private readonly actionSheetService: ActionSheetService,
     private readonly modalCtrl: ModalController,
