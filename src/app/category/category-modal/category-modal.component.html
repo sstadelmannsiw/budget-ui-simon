@@ -32,3 +32,8 @@
   <ion-icon slot="start" name="save"></ion-icon>
   Save
 </ion-button>
+<ion-header>
+  <ion-toolbar>
+    <ion-progress-bar *ngIf="submitting" type="indeterminate"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
