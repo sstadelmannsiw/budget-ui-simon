@@ -37,3 +37,7 @@
     ></ion-input>
   </ion-item>
 </ion-content>
+<ion-button color="medium" (click)="cancel()" [disabled]="submitting">
+  <ion-icon slot="start" name="close"></ion-icon>
+  Cancel
+</ion-button>
