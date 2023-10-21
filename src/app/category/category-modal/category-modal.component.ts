@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ActionSheetService } from '../../shared/service/action-sheet.service';
 import { filter, from } from 'rxjs';
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {CategoryService} from "../category.service";
+import {ToastService} from "../../shared/service/toast.service";
 
 @Component({
   selector: 'app-category-modal',
@@ -13,7 +15,10 @@ export class CategoryModalComponent {
   submitting = false; // Füge submitting hinzu
   constructor(
     private readonly actionSheetService: ActionSheetService,
+    private readonly categoryService: CategoryService,
+    private readonly formBuilder: FormBuilder,
     private readonly modalCtrl: ModalController,
+    private readonly toastService: ToastService
   ) {}
 
   cancel(): void {
