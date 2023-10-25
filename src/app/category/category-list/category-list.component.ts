@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CategoryModalComponent } from '../category-modal/category-modal.component';
-import {InfiniteScrollCustomEvent, ModalController} from '@ionic/angular';
+import {InfiniteScrollCustomEvent, ModalController, RefresherCustomEvent} from '@ionic/angular';
 import {Category, CategoryCriteria} from '../../shared/domain';
 import {CategoryService} from "../category.service";
 import {ToastService} from "../../shared/service/toast.service";
@@ -53,5 +53,9 @@ export class CategoryListComponent {
   loadNextCategoryPage($event: any) {
     this.searchCriteria.page++;
     this.loadCategories(() => ($event as InfiniteScrollCustomEvent).target.complete());
+  }
+  reloadCategories($event?: any): void {
+    this.searchCriteria.page = 0;
+    this.loadCategories(() => ($event ? ($event as RefresherCustomEvent).target.complete() : {}));
   }
 }
