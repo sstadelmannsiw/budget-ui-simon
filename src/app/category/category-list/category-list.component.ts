@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CategoryModalComponent } from '../category-modal/category-modal.component';
+import {Component} from '@angular/core';
+import {CategoryModalComponent} from '../category-modal/category-modal.component';
 import {InfiniteScrollCustomEvent, ModalController, RefresherCustomEvent} from '@ionic/angular';
 import {Category, CategoryCriteria} from '../../shared/domain';
 import {CategoryService} from "../category.service";
@@ -15,23 +15,28 @@ export class CategoryListComponent {
   readonly initialSort = 'name,asc';
   lastPageReached = false;
   loading = false;
-  searchCriteria: CategoryCriteria = { page: 0, size: 25, sort: this.initialSort };
+  searchCriteria: CategoryCriteria = {page: 0, size: 25, sort: this.initialSort};
+
   constructor(
     private readonly modalCtrl: ModalController,
-  private readonly categoryService: CategoryService,
-  private readonly toastService: ToastService) {}
+    private readonly categoryService: CategoryService,
+    private readonly toastService: ToastService) {
+  }
 
   async openModal(category?: Category): Promise<void> {
-    const modal = await this.modalCtrl.create({ component: CategoryModalComponent });
+    const modal = await this.modalCtrl.create({component: CategoryModalComponent});
     modal.present();
-    const { role } = await modal.onWillDismiss();
+    const {role} = await modal.onWillDismiss();
     if (role === 'refresh') this.reloadCategories();
     console.log('role', role);
   }
+
   ionViewDidEnter(): void {
     this.loadCategories();
   }
-  private loadCategories(next: () => void = () => {}): void {
+
+  private loadCategories(next: () => void = () => {
+  }): void {
     if (!this.searchCriteria.name) delete this.searchCriteria.name;
     this.loading = true;
     this.categoryService
@@ -51,10 +56,12 @@ export class CategoryListComponent {
         error: (error) => this.toastService.displayErrorToast('Could not load categories', error),
       });
   }
+
   loadNextCategoryPage($event: any) {
     this.searchCriteria.page++;
     this.loadCategories(() => ($event as InfiniteScrollCustomEvent).target.complete());
   }
+
   reloadCategories($event?: any): void {
     this.searchCriteria.page = 0;
     this.loadCategories(() => ($event ? ($event as RefresherCustomEvent).target.complete() : {}));
