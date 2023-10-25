@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CategoryModalComponent } from '../category-modal/category-modal.component';
 import { ModalController } from '@ionic/angular';
 import {Category, CategoryCriteria} from '../../shared/domain';
+import {CategoryService} from "../category.service";
+import {ToastService} from "../../shared/service/toast.service";
 
 @Component({
   selector: 'app-category-list',
@@ -13,7 +15,9 @@ export class CategoryListComponent {
   lastPageReached = false;
   loading = false;
   searchCriteria: CategoryCriteria = { page: 0, size: 25, sort: this.initialSort };
-  constructor(private readonly modalCtrl: ModalController) {}
+  constructor(private readonly modalCtrl: ModalController,
+  private readonly categoryService: CategoryService,
+  private readonly toastService: ToastService) {}
 
   async openModal(category?: Category): Promise<void> {
     const modal = await this.modalCtrl.create({ component: CategoryModalComponent });
