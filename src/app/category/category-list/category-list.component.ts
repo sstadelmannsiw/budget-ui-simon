@@ -27,6 +27,9 @@ export class CategoryListComponent {
     const { role } = await modal.onWillDismiss();
     console.log('role', role);
   }
+  ionViewDidEnter(): void {
+    this.loadCategories();
+  }
   private loadCategories(next: () => void = () => {}): void {
     if (!this.searchCriteria.name) delete this.searchCriteria.name;
     this.loading = true;
