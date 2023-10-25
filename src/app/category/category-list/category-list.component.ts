@@ -25,13 +25,8 @@ export class CategoryListComponent {
     const modal = await this.modalCtrl.create({ component: CategoryModalComponent });
     modal.present();
     const { role } = await modal.onWillDismiss();
-    console.log('role', role);
-  }
-  async openModal(category?: Category): Promise<void> {
-    const modal = await this.modalCtrl.create({ component: CategoryModalComponent });
-    modal.present();
-    const { role } = await modal.onWillDismiss();
     if (role === 'refresh') this.reloadCategories();
+    console.log('role', role);
   }
   ionViewDidEnter(): void {
     this.loadCategories();
