@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CategoryModalComponent } from '../category-modal/category-modal.component';
-import { ModalController } from '@ionic/angular';
+import {InfiniteScrollCustomEvent, ModalController} from '@ionic/angular';
 import {Category, CategoryCriteria} from '../../shared/domain';
 import {CategoryService} from "../category.service";
 import {ToastService} from "../../shared/service/toast.service";
@@ -49,5 +49,9 @@ export class CategoryListComponent {
         },
         error: (error) => this.toastService.displayErrorToast('Could not load categories', error),
       });
+  }
+  loadNextCategoryPage($event: any) {
+    this.searchCriteria.page++;
+    this.loadCategories(() => ($event as InfiniteScrollCustomEvent).target.complete());
   }
 }
