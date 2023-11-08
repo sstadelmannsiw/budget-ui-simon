@@ -32,6 +32,11 @@
   <ion-icon slot="start" name="save"></ion-icon>
   Save
 </ion-button>
+<ion-fab *ngIf="category.id" slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="delete()" color="danger" [disabled]="submitting">
+    <ion-icon name="trash"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 <ion-header>
   <ion-toolbar>
     <ion-progress-bar *ngIf="submitting" type="indeterminate"></ion-progress-bar>
