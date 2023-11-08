@@ -24,6 +24,7 @@ export class CategoryModalComponent {
     private readonly toastService: ToastService
   ) {
     this.categoryForm = this.formBuilder.group({
+      id: [], // hidden
       name: ['', [Validators.required, Validators.maxLength(40)]],
     });
   }
