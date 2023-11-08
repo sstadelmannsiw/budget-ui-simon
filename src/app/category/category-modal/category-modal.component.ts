@@ -28,7 +28,9 @@ export class CategoryModalComponent {
       name: ['', [Validators.required, Validators.maxLength(40)]],
     });
   }
-
+  ionViewWillEnter(): void {
+    this.categoryForm.patchValue(this.category);
+  }
 
   cancel(): void {
     this.modalCtrl.dismiss(null, 'cancel');
