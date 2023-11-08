@@ -52,6 +52,9 @@ export class CategoryListComponent {
   ionViewDidEnter(): void {
     this.loadCategories();
   }
+  ionViewDidLeave(): void {
+    this.searchFormSubscription.unsubscribe();
+  }
 
   private loadCategories(next: () => void = () => {
   }): void {
