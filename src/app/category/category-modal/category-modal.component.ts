@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategoryService} from "../category.service";
 import {ToastService} from "../../shared/service/toast.service";
 import {save} from "ionicons/icons";
+import {Category} from "../../shared/domain";
 
 @Component({
   selector: 'app-category-modal',
@@ -14,6 +15,7 @@ import {save} from "ionicons/icons";
 export class CategoryModalComponent {
   readonly categoryForm!: FormGroup; // Füge categoryForm hinzu
   submitting = false; // Füge submitting hinzu
+  category: Category = {} as Category;
   constructor(
     private readonly actionSheetService: ActionSheetService,
     private readonly categoryService: CategoryService,

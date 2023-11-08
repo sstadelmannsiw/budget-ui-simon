@@ -19,12 +19,13 @@ export class CategoryListComponent {
   loading = false;
   searchCriteria: CategoryCriteria = {page: 0, size: 25, sort: this.initialSort};
   readonly sortOptions: SortOption[] = [
-    { label: 'Created at (newest first)', value: 'createdAt,desc' },
-    { label: 'Created at (oldest first)', value: 'createdAt,asc' },
-    { label: 'Name (A-Z)', value: 'name,asc' },
-    { label: 'Name (Z-A)', value: 'name,desc' },
+    {label: 'Created at (newest first)', value: 'createdAt,desc'},
+    {label: 'Created at (oldest first)', value: 'createdAt,asc'},
+    {label: 'Name (A-Z)', value: 'name,asc'},
+    {label: 'Name (Z-A)', value: 'name,desc'},
   ];
   private readonly searchFormSubscription: Subscription;
+
   constructor(
     private readonly modalCtrl: ModalController,
     private readonly categoryService: CategoryService,
@@ -42,7 +43,10 @@ export class CategoryListComponent {
   }
 
   async openModal(category?: Category): Promise<void> {
-    const modal = await this.modalCtrl.create({component: CategoryModalComponent});
+    const modal = await this.modalCtrl.create({
+      component: CategoryModalComponent,
+      componentProps: {category: category ? {...category} : {}},
+    });
     modal.present();
     const {role} = await modal.onWillDismiss();
     if (role === 'refresh') this.reloadCategories();
@@ -52,6 +56,7 @@ export class CategoryListComponent {
   ionViewDidEnter(): void {
     this.loadCategories();
   }
+
   ionViewDidLeave(): void {
     this.searchFormSubscription.unsubscribe();
   }
