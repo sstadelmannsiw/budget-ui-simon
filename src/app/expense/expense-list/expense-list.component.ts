@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { addMonths, set } from 'date-fns';
 import { ModalController } from '@ionic/angular';
 import { ExpenseModalComponent } from '../expense-modal/expense-modal.component';
-import { Expense } from '../../shared/domain';
+import {Expense, SortOption} from '../../shared/domain';
 
 @Component({
   selector: 'app-expense-overview',
@@ -10,7 +10,14 @@ import { Expense } from '../../shared/domain';
 })
 export class ExpenseListComponent {
   date = set(new Date(), { date: 1 });
-
+  readonly sortOptions: SortOption[] = [
+    {label: 'Created at (newest first)', value: 'createdAt,desc'},
+    {label: 'Created at (oldest first)', value: 'createdAt,asc'},
+    {label: 'Date (newest first)', value: 'createdAt,desc'},
+    {label: 'Date (oldest first)', value: 'createdAt,asc'},
+    {label: 'Name (A-Z)', value: 'name,asc'},
+    {label: 'Name (Z-A)', value: 'name,desc'},
+  ];
   constructor(private readonly modalCtrl: ModalController) {}
 
   addMonths = (number: number): void => {
