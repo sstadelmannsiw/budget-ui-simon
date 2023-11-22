@@ -3,6 +3,7 @@ import { addMonths, set } from 'date-fns';
 import { ModalController } from '@ionic/angular';
 import { ExpenseModalComponent } from '../expense-modal/expense-modal.component';
 import {Expense, SortOption} from '../../shared/domain';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-expense-overview',
