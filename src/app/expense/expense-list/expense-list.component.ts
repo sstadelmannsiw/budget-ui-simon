@@ -3,7 +3,8 @@ import { addMonths, set } from 'date-fns';
 import { ModalController } from '@ionic/angular';
 import { ExpenseModalComponent } from '../expense-modal/expense-modal.component';
 import {Expense, SortOption} from '../../shared/domain';
-import {FormGroup} from "@angular/forms";
+import {FormGroup, FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-expense-overview',
@@ -19,7 +20,14 @@ export class ExpenseListComponent {
     {label: 'Name (A-Z)', value: 'name,asc'},
     {label: 'Name (Z-A)', value: 'name,desc'},
   ];
-  constructor(private readonly modalCtrl: ModalController) {}
+  myForm: FormGroup;
+  constructor(private readonly modalCtrl: ModalController) {
+    this.myForm = new FormGroup({
+      search: new FormControl(''),
+      category: new FormControl(''),
+      sort: new FormControl(''),
+    });
+  }
 
   addMonths = (number: number): void => {
     this.date = addMonths(this.date, number);
